@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday, My Girl.....💗🎀 ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #13081a;
+      --bg-mid: #231030;
+      --bg-card: rgba(45, 22, 60, 0.58);
+      --rose-gold: #f0b6c2;
+      --rose-bright: #ffd9e2;
+      --gold-soft: #e8c391;
+      --text-main: #fdf4f6;
+      --text-muted: #d9bfd0;
+      --border-glow: rgba(240, 182, 194, 0.28);
+      --shadow-glow: 0 12px 40px rgba(0, 0, 0, 0.45), 0 0 28px rgba(240, 182, 194, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at 20% 15%, #341647 0%, #1a0b24 45%, #0e0514 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.65;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      letter-spacing: 0.02em;
+    }
+
+    /* Ambient Canvas */
+    #bgCanvas, #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    #bgCanvas { z-index: 0; }
+    #confettiCanvas { z-index: 90; }
+
+    /* Top Controls */
+    .top-controls {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 80;
+      display: flex;
+      gap: 10px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+    .top-controls.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .pill-btn {
+      background: rgba(30, 14, 42, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--rose-bright);
+      border: 1px solid var(--border-glow);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.84rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .pill-btn:hover {
+      background: rgba(58, 28, 78, 0.85);
+      box-shadow: 0 0 18px rgba(240, 182, 194, 0.25);
+      transform: translateY(-1px);
+    }
+
+    /* Entrance Overlay */
+    #entrance {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: radial-gradient(circle at center, #331445 0%, #15081d 65%, #0c0411 100%);
+      transition: opacity 0.85s ease, visibility 0.85s ease, transform 0.85s ease;
+    }
+    #entrance.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.06);
+      pointer-events: none;
+    }
+
+    .entrance-card {
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+      padding: 40px 28px;
+      border-radius: 28px;
+      background: rgba(38, 17, 52, 0.62);
+      border: 1px solid var(--border-glow);
+      box-shadow: var(--shadow-glow);
+      backdrop-filter: blur(14px);
+    }
+
+    .envelope-icon {
+      width: 96px;
+      height: 74px;
+      margin: 0 auto 24px;
+      position: relative;
+      cursor: pointer;
+      animation: floatY 3s ease-in-out infinite;
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .entrance-tag {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--gold-soft);
+      margin-bottom: 10px;
+    }
+    .entrance-title {
+      font-size: 2.3rem;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #fff6f8, #f4b6c2, #e8c391);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .entrance-sub {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, #e598ab, #d99b7c);
+      color: #1c0a21;
+      border: none;
+      border-radius: 999px;
+      padding: 13px 28px;
+      font-size: 0.96rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(229, 152, 171, 0.34);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(229, 152, 171, 0.48);
+    }
+    .primary-btn:active {
+      transform: scale(0.97);
+    }
+
+    .secondary-btn {
+      background: transparent;
+      color: var(--rose-bright);
+      border: 1px solid var(--border-glow);
+      border-radius: 999px;
+      padding: 11px 22px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .secondary-btn:hover {
+      background: rgba(240, 182, 194, 0.12);
+      transform: translateY(-1px);
+    }
+
+    /* Main Content */
+    main {
+      position: relative;
+      z-index: 10;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 20px 90px;
+    }
+
+    section {
+      padding: 64px 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 82vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 84px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(240, 182, 194, 0.12);
+      border: 1px solid var(--border-glow);
+      color: var(--gold-soft);
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 8vw, 4.8rem);
+      font-weight: 700;
+      line-height: 1.12;
+      margin-bottom: 18px;
+      color: #ffd9e2;
+      text-shadow: 0 0 32px rgba(240, 182, 194, 0.25);
+    }
+
+    .hero-gradient-text {
+      background: linear-gradient(135deg, #ffffff 10%, #ffd2de 50%, #ecc798 95%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      max-width: 560px;
+      color: var(--text-muted);
+      font-size: clamp(1rem, 2.5vw, 1.14rem);
+      margin-bottom: 34px;
+    }
+
+    .scroll-hint {
+      color: var(--rose-gold);
+      font-size: 0.85rem;
+      opacity: 0.8;
+      animation: bounceDown 2.2s infinite;
+      text-decoration: none;
+    }
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* Glass Panel */
+    .glass-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glow);
+      border-radius: 28px;
+      padding: 36px 24px;
+      box-shadow: var(--shadow-glow);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      text-align: center;
+    }
+
+    .section-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold-soft);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      margin-bottom: 10px;
+      color: var(--rose-bright);
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 520px;
+      margin: 0 auto 28px;
+    }
+
+    /* Cake Section */
+    .cake-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .cake-wrap {
+      cursor: pointer;
+      transition: transform 0.25s ease;
+      max-width: 280px;
+      width: 100%;
+    }
+    .cake-wrap:hover {
+      transform: scale(1.03);
+    }
+
+    .flame {
+      transform-origin: center bottom;
+      animation: flicker 0.55s ease-in-out infinite alternate;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .flame.delay-1 { animation-delay: 0.15s; }
+    .flame.delay-2 { animation-delay: 0.3s; }
+
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-2deg); opacity: 0.94; }
+      100% { transform: scale(1.08, 0.92) rotate(2deg); opacity: 1; }
+    }
+
+    .candles-out .flame {
+      opacity: 0;
+      transform: scale(0.1) translateY(-10px);
+      animation: none;
+    }
+
+    .smoke {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .candles-out .smoke {
+      animation: riseSmoke 1.8s ease-out forwards;
+    }
+    @keyframes riseSmoke {
+      0% { opacity: 0.75; transform: translateY(0) scale(0.8); }
+      100% { opacity: 0; transform: translateY(-28px) scale(1.5); }
+    }
+
+    .wish-reveal {
+      max-width: 480px;
+      padding: 18px 22px;
+      border-radius: 18px;
+      background: rgba(240, 182, 194, 0.11);
+      border: 1px solid rgba(232, 195, 145, 0.35);
+      color: #fff3f6;
+      font-size: 0.98rem;
+      display: none;
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .wish-reveal.show {
+      display: block;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cake-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    /* 3D Flip Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .flip-card {
+      perspective: 1000px;
+      height: 215px;
+      cursor: pointer;
+    }
+
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flip-card.flipped .flip-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 22px;
+      padding: 22px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 1px solid var(--border-glow);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
+    }
+
+    .flip-front {
+      background: linear-gradient(155deg, rgba(64, 29, 86, 0.78), rgba(34, 15, 48, 0.92));
+    }
+    .flip-front .card-emoji {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .flip-front h3 {
+      font-size: 1.45rem;
+      color: var(--rose-bright);
+      margin-bottom: 6px;
+    }
+    .flip-front span {
+      font-size: 0.78rem;
+      color: var(--gold-soft);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .flip-back {
+      background: linear-gradient(155deg, rgba(240, 182, 194, 0.18), rgba(45, 20, 62, 0.95));
+      transform: rotateY(180deg);
+      color: var(--text-main);
+      font-size: 0.93rem;
+      line-height: 1.55;
+    }
+
+    /* Sealed Envelope Letter */
+    .letter-shell {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .sealed-box {
+      padding: 36px 24px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(72, 31, 90, 0.72), rgba(34, 14, 46, 0.88));
+      border: 1px solid var(--border-glow);
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .sealed-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(240, 182, 194, 0.2);
+    }
+
+    .wax-seal {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 32%, #e06d88, #9d2948 70%, #6d1830 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 6px 18px rgba(157, 41, 72, 0.55), inset 0 2px 6px rgba(255, 255, 255, 0.28);
+    }
+
+    .stationery {
+      display: none;
+      text-align: left;
+      background: linear-gradient(180deg, #fff9fa 0%, #fceff2 100%);
+      color: #2f1738;
+      border-radius: 22px;
+      padding: 34px 28px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(232, 195, 145, 0.6);
+      position: relative;
+      animation: unfold 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .stationery.open {
+      display: block;
+    }
+    @keyframes unfold {
+      from { opacity: 0; transform: translateY(16px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .stationery-header {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #6b244c;
+      margin-bottom: 14px;
+    }
+
+    .stationery-body {
+      font-size: 1rem;
+      line-height: 1.8;
+      white-space: pre-line;
+      color: #3a1f43;
+      margin-bottom: 22px;
+    }
+
+    .stationery-sign {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.45rem;
+      font-style: italic;
+      color: #7c2d56;
+      text-align: right;
+    }
+
+    /* Jar of Sparkles */
+    .sparkle-status {
+      margin-top: 16px;
+      min-height: 28px;
+      color: var(--rose-bright);
+      font-size: 0.95rem;
+    }
+
+    .wish-bubble {
+      position: fixed;
+      bottom: -40px;
+      z-index: 85;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(45, 20, 62, 0.88);
+      border: 1px solid rgba(240, 182, 194, 0.55);
+      color: #fff3f7;
+      font-size: 0.9rem;
+      box-shadow: 0 8px 24px rgba(240, 182, 194, 0.28);
+      backdrop-filter: blur(8px);
+      pointer-events: none;
+      animation: floatBubble 5.2s ease-out forwards;
+      white-space: nowrap;
+    }
+    @keyframes floatBubble {
+      0% { transform: translateY(0) scale(0.85); opacity: 0; }
+      15% { opacity: 1; }
+      85% { opacity: 0.95; }
+      100% { transform: translateY(-92vh) scale(1.04); opacity: 0; }
+    }
+
+    /* Customize Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      background: rgba(10, 4, 16, 0.78);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #200e2d;
+      border: 1px solid var(--border-glow);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 26px 22px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .modal-head h3 {
+      font-size: 1.7rem;
+      color: var(--rose-bright);
+    }
+    .close-x {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.6rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .field {
+      margin-bottom: 14px;
+      text-align: left;
+    }
+    .field label {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--gold-soft);
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+    }
+    .field input, .field textarea {
+      width: 100%;
+      background: rgba(17, 7, 24, 0.75);
+      border: 1px solid var(--border-glow);
+      border-radius: 12px;
+      padding: 10px 12px;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.93rem;
+      outline: none;
+    }
+    .field input:focus, .field textarea:focus {
+      border-color: var(--rose-gold);
+    }
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .preset-chip {
+      background: rgba(240, 182, 194, 0.14);
+      border: 1px solid var(--border-glow);
+      color: var(--rose-bright);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+    .preset-chip:hover {
+      background: rgba(240, 182, 194, 0.26);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      opacity: 0.78;
+      padding-top: 32px;
+    }
+
+    @media (max-width: 520px) {
+      .glass-panel { padding: 28px 18px; }
+      .stationery { padding: 26px 20px; }
+      .top-controls { top: 12px; right: 12px; }
+      .pill-btn { padding: 7px 12px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bgCanvas"></canvas>
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Top Controls -->
+  <div class="top-controls" id="topControls">
+    <button class="pill-btn" id="musicBtn" aria-label="Toggle birthday music">🎵 Music: On</button>
+    <button class="pill-btn" id="customizeBtn" aria-label="Customize website">✨ Customize</button>
+  </div>
+
+  <!-- Entrance Screen -->
+  <div id="entrance">
+    <div class="entrance-card">
+      <div class="envelope-icon" id="entranceEnvelope" title="Open your surprise">
+        <svg viewBox="0 0 120 90" width="96" height="74" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="10" width="112" height="74" rx="12" fill="url(#envBg)" stroke="#f0b6c2" stroke-width="2.5"/>
+          <path d="M8 15L60 54L112 15" stroke="#e8c391" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="60" cy="51" r="13" fill="#c94b6d" stroke="#ffd9e2" stroke-width="2"/>
+          <path d="M60 56.5C60 56.5 53.5 52.3 53.5 48.2C53.5 46.3 55 45 56.7 45C58 45 59.2 45.8 60 47C60.8 45.8 62 45 63.3 45C65 45 66.5 46.3 66.5 48.2C66.5 52.3 60 56.5 60 56.5Z" fill="#fff3f6"/>
+          <defs>
+            <linearGradient id="envBg" x1="4" y1="10" x2="116" y2="84" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4b2063"/>
+              <stop offset="1" stop-color="#280f38"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="entrance-tag">For My Girl.....💗🎀</div>
+      <h1 class="entrance-title">A Little Birthday Surprise</h1>
+      <p class="entrance-sub">Tap below to open your birthday wishes and hear a soft melody made just for today.</p>
+      <button class="primary-btn" id="openSurpriseBtn">Open Surprise ✨</button>
+    </div>
+  </div>
+
+  <!-- Main Website -->
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-badge">Celebrating You Today</div>
+      <h1><span class="hero-gradient-text">Happy Birthday,</span><br><span id="displayName">My Girl.....💗🎀</span> ✨</h1>
+      <p class="hero-subtitle" id="displaySubtitle">
+        May this year wrap you in warmth, effortless smiles, and every little dream you’ve quietly wished for.
+      </p>
+      <a href="#cake-section" class="scroll-hint">Scroll down for your birthday cake ↓</a>
+    </section>
+
+    <!-- Interactive Cake -->
+    <section id="cake-section">
+      <div class="glass-panel">
+        <div class="section-kicker">Step One</div>
+        <h2 class="section-title">Make a Birthday Wish</h2>
+        <p class="section-desc">Close your eyes for a second, think of your favourite wish, and tap the cake to blow out the candles.</p>
+
+        <div class="cake-stage">
+          <div class="cake-wrap" id="cakeWrap" role="button" tabindex="0" aria-label="Birthday cake">
+            <svg viewBox="0 0 260 230" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+              <!-- Plate -->
+              <ellipse cx="130" cy="206" rx="108" ry="15" fill="rgba(240,182,194,0.22)" />
+              <ellipse cx="130" cy="202" rx="96" ry="11" fill="#3b1b4f" stroke="#f0b6c2" stroke-opacity="0.4" />
+
+              <!-- Bottom Tier -->
+              <rect x="44" y="138" width="172" height="62" rx="14" fill="url(#tier1)" />
+              <path d="M44 152 Q58 166 72 152 T100 152 T128 152 T156 152 T184 152 T216 152 L216 144 Q216 138 208 138 L52 138 Q44 138 44 144 Z" fill="#ffd9e2" />
+
+              <!-- Top Tier -->
+              <rect x="68" y="88" width="124" height="54" rx="12" fill="url(#tier2)" />
+              <path d="M68 100 Q80 113 92 100 T116 100 T140 100 T164 100 T192 100 L192 94 Q192 88 184 88 L76 88 Q68 88 68 94 Z" fill="#fff0f4" />
+
+              <!-- Sprinkles -->
+              <circle cx="95" cy="122" r="3" fill="#e8c391"/>
+              <circle cx="130" cy="118" r="3" fill="#ffd9e2"/>
+              <circle cx="164" cy="123" r="3" fill="#e8c391"/>
+              <circle cx="80" cy="176" r="3.5" fill="#e8c391"/>
+              <circle cx="114" cy="172" r="3.5" fill="#ffd9e2"/>
+              <circle cx="148" cy="178" r="3.5" fill="#e8c391"/>
+              <circle cx="182" cy="172" r="3.5" fill="#ffd9e2"/>
+
+              <!-- Candles -->
+              <rect x="94" y="54" width="10" height="34" rx="4" fill="#f7d6e0"/>
+              <rect x="125" y="48" width="10" height="40" rx="4" fill="#e8c391"/>
+              <rect x="156" y="54" width="10" height="34" rx="4" fill="#f7d6e0"/>
+
+              <!-- Flames -->
+              <g class="flame">
+                <path d="M99 30 C105 40 106 47 99 52 C92 47 93 40 99 30 Z" fill="#ffbe55"/>
+                <path d="M99 38 C102 43 102 48 99 51 C96 48 96 43 99 38 Z" fill="#fff7d1"/>
+              </g>
+              <g class="flame delay-1">
+                <path d="M130 22 C136 33 137 41 130 46 C123 41 124 33 130 22 Z" fill="#ffbe55"/>
+                <path d="M130 31 C133 36 133 42 130 45 C127 42 127 36 130 31 Z" fill="#fff7d1"/>
+              </g>
+              <g class="flame delay-2">
+                <path d="M161 30 C167 40 168 47 161 52 C154 47 155 40 161 30 Z" fill="#ffbe55"/>
+                <path d="M161 38 C164 43 164 48 161 51 C158 48 158 43 161 38 Z" fill="#fff7d1"/>
+              </g>
+
+              <!-- Smoke Wisps -->
+              <g class="smoke" stroke="#e9d8ef" stroke-width="2.2" stroke-linecap="round" fill="none">
+                <path d="M99 50 Q94 40 100 32" />
+                <path d="M130 44 Q136 34 129 24" />
+                <path d="M161 50 Q156 40 162 32" />
+              </g>
+
+              <defs>
+                <linearGradient id="tier1" x1="44" y1="138" x2="216" y2="200" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#c96b88"/>
+                  <stop offset="1" stop-color="#87355d"/>
+                </linearGradient>
+                <linearGradient id="tier2" x1="68" y1="88" x2="192" y2="142" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#df86a1"/>
+                  <stop offset="1" stop-color="#a1456d"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <div class="cake-actions">
+            <button class="primary-btn" id="blowBtn">Make a Wish & Blow Candles 🌬️</button>
+            <button class="secondary-btn" id="relightBtn" style="display:none;">Relight Candles 🕯️</button>
+          </div>
+
+          <div class="wish-reveal" id="wishReveal">
+            ✨ Wish locked in! May every single hope you held in your heart right now find its way to you this year.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3D Flip Cards -->
+    <section id="cards-section">
+      <div class="glass-panel">
+        <div class="section-kicker">Little Reminders</div>
+        <h2 class="section-title">Why Today Is So Special</h2>
+        <p class="section-desc">Tap each card to flip it over.</p>
+
+        <div class="cards-grid">
+          <div class="flip-card" tabindex="0">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <div class="card-emoji">🌸</div>
+                <h3>Your Smile</h3>
+                <span>Tap to reveal</span>
+              </div>
+              <div class="flip-face flip-back">
+                Nuvvu navvithe chaalu, even the heaviest day suddenly feels lighter and brighter.
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" tabindex="0">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <div class="card-emoji">🤍</div>
+                <h3>Always Real</h3>
+                <span>Tap to reveal</span>
+              </div>
+              <div class="flip-face flip-back">
+                No matter how many silly fights or busy days happen, you will always matter deeply to me.
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" tabindex="0">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <div class="card-emoji">✨</div>
+                <h3>Your Year</h3>
+                <span>Tap to reveal</span>
+              </div>
+              <div class="flip-face flip-back">
+                Wishing you peace, crazy laughter, good health, and everything your heart quietly wishes for.
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" tabindex="0">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <div class="card-emoji">🎂</div>
+                <h3>Favourite Person</h3>
+                <span>Tap to reveal</span>
+              </div>
+              <div class="flip-face flip-back">
+                Thank you for being in my life and making ordinary moments feel unforgettable.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sealed Letter -->
+    <section id="letter-section">
+      <div class="glass-panel">
+        <div class="section-kicker">A Note For You</div>
+        <h2 class="section-title">Sealed With Warmth</h2>
+        <p class="section-desc">Tap the wax seal to unfold your birthday note.</p>
+
+        <div class="letter-shell">
+          <div class="sealed-box" id="sealedBox" role="button" tabindex="0">
+            <div class="wax-seal">🤍</div>
+            <h3 class="serif" style="font-size:1.65rem; color:#ffd9e2; margin-bottom:6px;">Tap to Open Letter</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Written just for your birthday</p>
+          </div>
+
+          <div class="stationery" id="stationery">
+            <div class="stationery-header">Dearest <span id="letterName">My Girl.....💗🎀</span></div>
+            <div class="stationery-body" id="letterBody">Happyyy birthdayy madam garuu 🎂✨
+
+Naku pedda pedda dialogues cheppadam radu kani okati mathram nijam — nuvvu navvithe chaalu, naa day motham set aipothundi. Nuvvu naa life lo undadam naku entha special oo words lo cheppalenu. Eppudu ilage navvuthu, happy ga undali... ee year antha niku kavalsina prathi okkati jaragali.
+
+Once again happy birthdayy, eppudu ilage happyy ga undu🤍 and I love youu sooo muchh💗😘💋💘</div>
+            <div class="stationery-sign">— <span id="letterSign">Your Man....💗</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Jar of Birthday Sparkles -->
+    <section id="sparkles-section">
+      <div class="glass-panel">
+        <div class="section-kicker">Before You Go</div>
+        <h2 class="section-title">Jar of Birthday Sparkles</h2>
+        <p class="section-desc">Tap as many times as you like to send glowing birthday wishes floating across the sky.</p>
+        <button class="primary-btn" id="sparkleBtn">Release a Birthday Wish ✨</button>
+        <div class="sparkle-status" id="sparkleStatus"></div>
+      </div>
+    </section>
+
+    <footer>
+      Made with love by <span id="footerSign">Your Man....💗</span>
+    </footer>
+  </main>
+
+  <!-- Customize Modal -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>Customize Wishes</h3>
+        <button class="close-x" id="closeModalBtn" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="preset-row">
+        <button type="button" class="preset-chip" id="presetTeluguCute">Telugu Cute Note</button>
+        <button type="button" class="preset-chip" id="presetTeluguSoft">Telugu Heartfelt Note</button>
+        <button type="button" class="preset-chip" id="presetEnglish">English Romantic Note</button>
+      </div>
+
+      <div class="field">
+        <label for="inputName">Her Name / Nickname</label>
+        <input id="inputName" type="text" placeholder="e.g. My Girl.....💗🎀" />
+      </div>
+
+      <div class="field">
+        <label for="inputSubtitle">Hero Subtitle</label>
+        <input id="inputSubtitle" type="text" />
+      </div>
+
+      <div class="field">
+        <label for="inputLetter">Birthday Letter</label>
+        <textarea id="inputLetter"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="inputSign">Your Signature</label>
+        <input id="inputSign" type="text" placeholder="e.g. Your Man....💗" />
+      </div>
+
+      <div class="modal-actions">
+        <button class="secondary-btn" id="resetBtn" type="button">Reset</button>
+        <button class="primary-btn" id="saveCustomBtn" type="button">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ============================
+       1. Personalization & Storage
+    ============================ */
+    const STORAGE_KEY = 'birthday_wishes_custom_v2';
+    const DEFAULTS = {
+      name: 'My Girl.....💗🎀',
+      subtitle: 'May this year wrap you in warmth, effortless smiles, and every little dream you’ve quietly wished for.',
+      letter: `Happyyy birthdayy madam garuu 🎂✨\n\nNaku pedda pedda dialogues cheppadam radu kani okati mathram nijam — nuvvu navvithe chaalu, naa day motham set aipothundi. Nuvvu naa life lo undadam naku entha special oo words lo cheppalenu. Eppudu ilage navvuthu, happy ga undali... ee year antha niku kavalsina prathi okkati jaragali.\n\nOnce again happy birthdayy, eppudu ilage happyy ga undu🤍 and I love youu sooo muchh💗😘💋💘`,
+      sign: 'Your Man....💗'
+    };
+
+    const PRESETS = {
+      teluguCute: DEFAULTS.letter,
+      teluguSoft: `Happyyy birthdayy madam garuu 🎂✨\n\nKonnisarlu nenu sarigga express cheyalekapovachu, konnisarlu chinna chinna godavalu avvochu... kani okati mathram epudu maradu, nuvvu naku chala ante chala special.\n\nEe birthday nundi niku only happiness ee undali. Always stay happy, happy birthdayy once again ✨🤍`,
+      english: `Words never quite feel enough when it comes to telling you how much you mean to me.\n\nThank you for bringing so much warmth, laughter, and light into my days. I hope this new chapter brings you endless peace, unforgettable memories, and every single thing that makes you smile.\n\nHappy Birthday, always stay the wonderful person you are 🤍✨`
+    };
+
+    function loadData() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+        return saved ? { ...DEFAULTS, ...saved } : { ...DEFAULTS };
+      } catch {
+        return { ...DEFAULTS };
+      }
+    }
+
+    function applyData(data) {
+      document.getElementById('displayName').textContent = data.name;
+      document.getElementById('letterName').textContent = data.name;
+      document.getElementById('displaySubtitle').textContent = data.subtitle;
+      document.getElementById('letterBody').textContent = data.letter;
+      document.getElementById('letterSign').textContent = data.sign;
+      document.getElementById('footerSign').textContent = data.sign;
+      document.title = `Happy Birthday, ${data.name} ✨`;
+    }
+
+    let currentData = loadData();
+    applyData(currentData);
+
+    /* ============================
+       2. Ambient Stars Canvas
+    ============================ */
+    const bgCanvas = document.getElementById('bgCanvas');
+    const bgCtx = bgCanvas.getContext('2d');
+    let stars = [];
+
+    function resizeCanvases() {
+      bgCanvas.width = window.innerWidth;
+      bgCanvas.height = window.innerHeight;
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+      stars = Array.from({ length: 65 }, () => ({
+        x: Math.random() * bgCanvas.width,
+        y: Math.random() * bgCanvas.height,
+        r: Math.random() * 1.8 + 0.5,
+        a: Math.random(),
+        s: Math.random() * 0.015 + 0.004
+      }));
+    }
+
+    function drawStars() {
+      bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+      for (const st of stars) {
+        st.a += st.s;
+        const alpha = 0.25 + Math.abs(Math.sin(st.a)) * 0.65;
+        bgCtx.beginPath();
+        bgCtx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+        bgCtx.fillStyle = `rgba(255, 224, 232, ${alpha})`;
+        bgCtx.fill();
+      }
+      requestAnimationFrame(drawStars);
+    }
+
+    /* ============================
+       3. Confetti Burst Engine
+    ============================ */
+    const confettiCanvas = document.getElementById('confettiCanvas');
+    const cCtx = confettiCanvas.getContext('2d');
+    let particles = [];
+
+    function launchConfetti(count = 75) {
+      const colors = ['#ffd9e2', '#f0b6c2', '#e8c391', '#ffffff', '#e07a9a'];
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: window.innerWidth * (0.2 + Math.random() * 0.6),
+          y: window.innerHeight * 0.45,
+          vx: (Math.random() - 0.5) * 9,
+          vy: -Math.random() * 11 - 3,
+          size: Math.random() * 6 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rot: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 10,
+          life: 1
+        });
+      }
+    }
+
+    function animateConfetti() {
+      cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      particles = particles.filter(p => p.life > 0);
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.22;
+        p.rot += p.vRot;
+        p.life -= 0.0085;
+        cCtx.save();
+        cCtx.globalAlpha = Math.max(0, p.life);
+        cCtx.translate(p.x, p.y);
+        cCtx.rotate((p.rot * Math.PI) / 180);
+        cCtx.fillStyle = p.color;
+        cCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.65);
+        cCtx.restore();
+      }
+      requestAnimationFrame(animateConfetti);
+    }
+
+    resizeCanvases();
+    window.addEventListener('resize', resizeCanvases);
+    drawStars();
+    animateConfetti();
+
+    /* ============================
+       4. Music-Box Melody (Web Audio)
+    ============================ */
+    let audioCtx = null;
+    let musicPlaying = false;
+    let musicTimer = null;
+
+    const NOTES = {
+      C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23,
+      G4: 392.00, A4: 440.00, Bb4: 466.16, C5: 523.25
+    };
+
+    const MELODY = [
+      ['C4', 0.35], ['C4', 0.2], ['D4', 0.5], ['C4', 0.5], ['F4', 0.5], ['E4', 0.95],
+      ['C4', 0.35], ['C4', 0.2], ['D4', 0.5], ['C4', 0.5], ['G4', 0.5], ['F4', 0.95],
+      ['C4', 0.35], ['C4', 0.2], ['C5', 0.5], ['A4', 0.5], ['F4', 0.5], ['E4', 0.5], ['D4', 0.9],
+      ['Bb4', 0.35], ['Bb4', 0.2], ['A4', 0.5], ['F4', 0.5], ['G4', 0.5], ['F4', 1.1]
+    ];
+
+    function playChime(freq, duration) {
+      if (!audioCtx || !musicPlaying) return;
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now);
+
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.exponentialRampToValueAtTime(0.11, now + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.0008, now + duration * 1.45);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + duration * 1.5);
+    }
+
+    let noteIdx = 0;
+    function stepMelody() {
+      if (!musicPlaying) return;
+      const [note, dur] = MELODY[noteIdx];
+      playChime(NOTES[note], dur);
+      noteIdx = (noteIdx + 1) % MELODY.length;
+      const pause = noteIdx === 0 ? 1400 : dur * 1000;
+      musicTimer = setTimeout(stepMelody, pause);
+    }
+
+    function startMusic() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+        audioCtx = new AudioContextClass();
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      musicPlaying = true;
+      noteIdx = 0;
+      clearTimeout(musicTimer);
+      stepMelody();
+      document.getElementById('musicBtn').textContent = '🎵 Music: On';
+    }
+
+    function stopMusic() {
+      musicPlaying = false;
+      clearTimeout(musicTimer);
+      document.getElementById('musicBtn').textContent = '🔇 Music: Off';
+    }
+
+    document.getElementById('musicBtn').addEventListener('click', () => {
+      if (musicPlaying) stopMusic();
+      else startMusic();
+    });
+
+    /* ============================
+       5. Entrance Interaction
+    ============================ */
+    function openExperience() {
+      document.getElementById('entrance').classList.add('hidden');
+      document.getElementById('topControls').classList.add('visible');
+      launchConfetti(90);
+      startMusic();
+    }
+    document.getElementById('openSurpriseBtn').addEventListener('click', openExperience);
+    document.getElementById('entranceEnvelope').addEventListener('click', openExperience);
+
+    /* ============================
+       6. Cake Blow-Out Interaction
+    ============================ */
+    const cakeWrap = document.getElementById('cakeWrap');
+    const blowBtn = document.getElementById('blowBtn');
+    const relightBtn = document.getElementById('relightBtn');
+    const wishReveal = document.getElementById('wishReveal');
+
+    function blowCandles() {
+      if (cakeWrap.classList.contains('candles-out')) return;
+      cakeWrap.classList.add('candles-out');
+      blowBtn.style.display = 'none';
+      relightBtn.style.display = 'inline-flex';
+      wishReveal.classList.add('show');
+      launchConfetti(95);
+    }
+
+    function relightCandles() {
+      cakeWrap.classList.remove('candles-out');
+      blowBtn.style.display = 'inline-flex';
+      relightBtn.style.display = 'none';
+      wishReveal.classList.remove('show');
+    }
+
+    cakeWrap.addEventListener('click', blowCandles);
+    blowBtn.addEventListener('click', blowCandles);
+    relightBtn.addEventListener('click', relightCandles);
+
+    /* ============================
+       7. Flip Cards
+    ============================ */
+    document.querySelectorAll('.flip-card').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('flipped'));
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.classList.toggle('flipped');
+        }
+      });
+    });
+
+    /* ============================
+       8. Sealed Letter
+    ============================ */
+    const sealedBox = document.getElementById('sealedBox');
+    const stationery = document.getElementById('stationery');
+
+    function openLetter() {
+      sealedBox.style.display = 'none';
+      stationery.classList.add('open');
+      launchConfetti(55);
+    }
+    sealedBox.addEventListener('click', openLetter);
+    sealedBox.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLetter();
+      }
+    });
+
+    /* ============================
+       9. Jar of Birthday Sparkles
+    ============================ */
+    const WISHES = [
+      'Always keep smiling ✨',
+      'Endless happiness this year 🤍',
+      'Best year ahead 🎂',
+      'May every dream come true 🌸',
+      'Eppudu ilage happy ga undu ✨',
+      'Favourite person forever 💫',
+      'Pure peace & crazy laughter 🥳',
+      'I love youu sooo muchh 💗'
+    ];
+    let wishCount = 0;
+
+    document.getElementById('sparkleBtn').addEventListener('click', () => {
+      const text = WISHES[wishCount % WISHES.length];
+      wishCount++;
+      const bubble = document.createElement('div');
+      bubble.className = 'wish-bubble';
+      bubble.textContent = text;
+      bubble.style.left = `${10 + Math.random() * 62}%`;
+      document.body.appendChild(bubble);
+      setTimeout(() => bubble.remove(), 5300);
+      document.getElementById('sparkleStatus').textContent =
+        `${wishCount} birthday ${wishCount === 1 ? 'wish' : 'wishes'} sent into the sky ✨`;
+    });
+
+    /* ============================
+       10. Customize Modal
+    ============================ */
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const inputName = document.getElementById('inputName');
+    const inputSubtitle = document.getElementById('inputSubtitle');
+    const inputLetter = document.getElementById('inputLetter');
+    const inputSign = document.getElementById('inputSign');
+
+    function openModal() {
+      inputName.value = currentData.name;
+      inputSubtitle.value = currentData.subtitle;
+      inputLetter.value = currentData.letter;
+      inputSign.value = currentData.sign;
+      modalBackdrop.classList.add('open');
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove('open');
+    }
+
+    document.getElementById('customizeBtn').addEventListener('click', openModal);
+    document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', e => {
+      if (e.target === modalBackdrop) closeModal();
+    });
+
+    document.getElementById('presetTeluguCute').addEventListener('click', () => {
+      inputLetter.value = PRESETS.teluguCute;
+    });
+    document.getElementById('presetTeluguSoft').addEventListener('click', () => {
+      inputLetter.value = PRESETS.teluguSoft;
+    });
+    document.getElementById('presetEnglish').addEventListener('click', () => {
+      inputLetter.value = PRESETS.english;
+    });
+
+    document.getElementById('saveCustomBtn').addEventListener('click', () => {
+      currentData = {
+        name: inputName.value.trim() || DEFAULTS.name,
+        subtitle: inputSubtitle.value.trim() || DEFAULTS.subtitle,
+        letter: inputLetter.value.trim() || DEFAULTS.letter,
+        sign: inputSign.value.trim() || DEFAULTS.sign
+      };
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(currentData)); } catch {}
+      applyData(currentData);
+      closeModal();
+      launchConfetti(45);
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      currentData = { ...DEFAULTS };
+      try { localStorage.removeItem(STORAGE_KEY); } catch {}
+      applyData(currentData);
+      openModal();
+    });
+  </script>
+</body>
+</html>
